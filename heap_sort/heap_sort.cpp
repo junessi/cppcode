@@ -86,16 +86,11 @@ void sort(std::vector<T>& v)
     build(v);
 
     size_t n = v.size() - 1;
-    while (true)
+    while (n > 0)
     {
         swap(v, 0, n);
         sink(v, 0, n);
         n--;
-
-        if (n == 0)
-        {
-            break;
-        }
     }
 }
 
