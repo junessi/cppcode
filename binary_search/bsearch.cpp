@@ -6,12 +6,12 @@ using namespace std;
 template <class T>
 bool binary_search(const vector<T>& v, const T& t)
 {
-    size_t n = v.size();
-    size_t l = 0;
-    size_t r = (n == 0) ? 0 : n - 1;
-    size_t i = (l + r)/2;
+    int32_t n = static_cast<int32_t>(v.size());
+    int32_t l = 0;
+    int32_t r = (n == 0) ? 0 : n - 1;
+    int32_t i = (l + r)/2;
 
-    while (l < r)
+    while (l <= r)
     {
         if (t < v[i])
         {
@@ -34,8 +34,15 @@ bool binary_search(const vector<T>& v, const T& t)
 
 int main(int argc, char** argv)
 {
-    vector<uint32_t> v{1, 5, 7, 9, 16, 22, 34};
-    cout << binary_search(v, 34u) << endl;
+    {
+        vector<uint32_t> v{1, 5, 7, 9, 16, 22, 34};
+        cout << binary_search(v, 34u) << endl;
+    }
+
+    {
+        vector<uint32_t> v{1};
+        cout << binary_search(v, 1u) << endl;
+    }
 
     return 0;
 }
