@@ -1,6 +1,6 @@
 set(BINARY ${CMAKE_PROJECT_NAME})
 
-add_subdirectory(binary_search)
+add_subdirectory(cppcode)
 
 set(SOURCES "main.cpp" ${SOURCES})
 

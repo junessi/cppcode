@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 #include <binarySearch/binarySearchTest.hpp>
-#include <binary_search/binary_search.hpp>
+#include <cppcode/binary_search.hpp>
 #include <vector>
 
 TEST(blaTest, test1)
