@@ -1,13 +1,14 @@
 #include <gtest/gtest.h>
 #include <RecursiveMutexTest/RecursiveMutexTest.hpp>
 #include <cppcode/heap_sort.hpp>
-#include <cppcode/recursive_mutex.hpp>
 #include <vector>
 
 TEST(RMutexTest, test0)
 {
-    MyTest mt;
-    std::thread t(&MyTest::f0, &mt);
+    using cppcode::test::RecursiveMutexTest;
+
+    RecursiveMutexTest mt;
+    std::thread t(&RecursiveMutexTest::f0, &mt);
     t.join();
 }
 

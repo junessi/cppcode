@@ -46,11 +46,6 @@ public:
         }
     }
 
-    uint32_t rdepth() const
-    {
-        return m_count;
-    }
-
 private:
     std::atomic<std::thread::id> m_ownerId;
     uint32_t m_count;
