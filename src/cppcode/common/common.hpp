@@ -1,6 +1,6 @@
 #pragma once
 
-namespace cppcode {
+namespace cppcode { namespace common {
 
     template <class T>
     void swap(std::vector<T>& v, size_t i, size_t j)
@@ -10,4 +10,4 @@ namespace cppcode {
         v[j] = t;
     }
 
-}
+}}

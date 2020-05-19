@@ -1,6 +1,5 @@
 #include <gtest/gtest.h>
 #include <RecursiveMutexTest/RecursiveMutexTest.hpp>
-#include <cppcode/heap_sort.hpp>
 #include <vector>
 
 TEST(RMutexTest, test0)

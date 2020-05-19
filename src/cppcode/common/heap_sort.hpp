@@ -3,9 +3,9 @@
 #include <iostream>
 #include <vector>
 #include <cstdint>
-#include <cppcode/common.hpp>
+#include <cppcode/common/common.hpp>
 
-namespace cppcode {
+namespace cppcode { namespace common {
 
     template <class T>
     void heap_sort(std::vector<T>& v);
@@ -33,7 +33,7 @@ namespace cppcode {
                 break;
             }
 
-            cppcode::swap(v, i, maxIndex);
+            cppcode::common::swap(v, i, maxIndex);
             i = maxIndex;
         }
     }
@@ -99,4 +99,4 @@ namespace cppcode {
         }
     }
 
-}
+}}

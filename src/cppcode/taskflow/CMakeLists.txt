@@ -1,0 +1,3 @@
+file(GLOB SOURCES *.hpp *.cpp)
+
+set(SOURCES ${SOURCES} PARENT_SCOPE)

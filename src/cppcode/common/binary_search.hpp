@@ -4,7 +4,7 @@
 #include <iostream>
 #include <cstdint>
 
-namespace cppcode {
+namespace cppcode { namespace common {
 
 template <class T>
 bool binary_search(const std::vector<T>& v, const T& t)
@@ -35,6 +35,6 @@ bool binary_search(const std::vector<T>& v, const T& t)
     return false;
 }
 
-}
+}}
 
 #endif

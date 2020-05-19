@@ -7,7 +7,7 @@
 #include <thread>
 #include <atomic>
 
-namespace cppcode {
+namespace cppcode { namespace common {
 
 class rmutex : public std::mutex
 {
@@ -51,6 +51,6 @@ private:
     uint32_t m_count;
 };
 
-}
+}}
 
 #endif
