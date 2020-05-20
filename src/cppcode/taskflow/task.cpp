@@ -12,6 +12,20 @@ Task::Task(std::string taskName, TaskOperation op, TaskFlow& parent)
 
 void Task::run()
 {
+    waitForDependents();
+
+    std::thread t(m_task);
+    t.join();
+
+    m_finished = true;
+
+    notifySuccessors()
+
+    m_parent.notify();
+}
+
+void Task::notifySuccessors()
+{
     std::unique_lock<std::mutex> depLock(m_dependentsMutex);
     m_cvDependents.wait(depLock, [this]()
                                  {
@@ -24,10 +38,10 @@ void Task::run()
                                      }
                                      return true;
                                  });
+}
 
-    std::thread t(m_task);
-    t.join();
-
+void Task::waitForDependents()
+{
     for (Task* t : m_successors)
     {
         if (t != nullptr)
@@ -35,10 +49,6 @@ void Task::run()
             t->notify();
         }
     }
-
-    m_finished = true;
-
-    m_parent.notify();
 }
 
 void Task::notify()

@@ -22,6 +22,8 @@ public:
 
 private:
     void addDependent(Task* t);
+    void notifySuccessors();
+    void waitForDependents();
 
     TaskOperation m_task;
     TaskFlow& m_parent;
