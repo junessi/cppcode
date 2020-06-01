@@ -2,4 +2,5 @@ add_subdirectory(binarySearch)
 add_subdirectory(heapSort)
 add_subdirectory(RecursiveMutexTest)
 add_subdirectory(TaskFlowTest)
+add_subdirectory(stringDeSerializationTest)
 

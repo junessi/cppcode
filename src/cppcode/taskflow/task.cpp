@@ -19,7 +19,7 @@ void Task::run()
 
     m_finished = true;
 
-    notifySuccessors()
+    notifySuccessors();
 
     m_parent.notify();
 }
