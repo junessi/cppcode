@@ -31,6 +31,17 @@ TEST(blaTest, DeSerialization1)
     EXPECT_EQ(std::string(20000, 'a'), deStr[3]);
 }
 
+TEST(blaTest, DeSerialization2)
+{
+    std::vector<std::string> strings{"f|o||o", "b|||a|||||r"};
+    std::string seStr = cppcode::common::string_serialize1(strings);
+    EXPECT_EQ(std::string("f||o||||o|b||||||a||||||||||r"), seStr);
+    std::vector<std::string> deStr = cppcode::common::string_deserialize1(seStr);
+    EXPECT_EQ(size_t(2), deStr.size());
+    EXPECT_EQ(std::string("f|o||o"), deStr[0]);
+    EXPECT_EQ(std::string("b|||a|||||r"), deStr[1]);
+}
+
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();

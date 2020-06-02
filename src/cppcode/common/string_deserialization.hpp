@@ -43,6 +43,58 @@ std::vector<std::string> string_deserialize0(const std::string& str)
     return deStr;
 }
 
+std::vector<std::string> string_deserialize1(const std::string& str)
+{
+    std::vector<std::string> deStr;
+
+    if (str.empty())
+    {
+        return deStr;
+    }
+
+    std::ostringstream oss;
+    auto c = str.begin();
+    while (1)
+    {
+        if (c != str.end())
+        {
+            if (*c == '|')
+            {
+                if ((c + 1) == str.end())
+                {
+                    break;
+                }
+                else if (*(c + 1) == '|')
+                {
+                    // skip char
+                    oss << *c;
+                    c++;
+                }
+                else
+                {
+                    // save string
+                    deStr.push_back(oss.str());
+                    oss.str(std::string());
+                }
+            }
+            else
+            {
+                oss << *c;
+            }
+
+            c++;
+        }
+        else
+        {
+            break;
+        }
+    }
+
+    deStr.push_back(oss.str());
+
+    return deStr;
+}
+
 }}
 
 #endif
