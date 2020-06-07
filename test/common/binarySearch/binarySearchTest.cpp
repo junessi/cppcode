@@ -1,5 +1,4 @@
 #include <gtest/gtest.h>
-#include <binarySearch/binarySearchTest.hpp>
 #include <cppcode/common/binary_search.hpp>
 #include <vector>
 

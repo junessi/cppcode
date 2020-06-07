@@ -1,5 +1,4 @@
 #include <gtest/gtest.h>
-#include <heapSort/heapSortTest.hpp>
 #include <cppcode/common/heap_sort.hpp>
 #include <vector>
 
@@ -18,7 +17,6 @@ TEST(heapSortTest, test0)
         std::vector<uint32_t> expected{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         ASSERT_TRUE(expected == v);
     }
-
 }
 
 int main(int argc, char **argv) {

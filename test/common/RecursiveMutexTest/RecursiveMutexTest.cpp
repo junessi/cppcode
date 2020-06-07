@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <RecursiveMutexTest/RecursiveMutexTest.hpp>
+#include <common/RecursiveMutexTest/RecursiveMutexTest.hpp>
 #include <vector>
 
 TEST(RMutexTest, test0)
