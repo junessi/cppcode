@@ -23,7 +23,14 @@ namespace cppcode { namespace common {
         struct has_iterator : std::false_type {};
 
         template <typename T>
-        struct has_iterator<T, void_t<typename T::iterator>> : std::true_type {};
+        struct has_iterator<T, void_t<typename T::iterator>>
+        {
+            typedef decltype(*(std::declval<typename T::iterator>())) derefType;
+            static const bool value = std::is_same<T, typename std::remove_cv<typename std::remove_reference<derefType>::type>::type>::value;
+        };
+
+        template <typename T>
+        const bool has_iterator<T, void_t<typename T::iterator>>::value;
 
         // has first
         template <typename T, typename = void>
@@ -38,13 +45,6 @@ namespace cppcode { namespace common {
 
         template <typename T>
         struct has_second<T, void_t<decltype(T::second)>> : std::true_type {};
-
-        // has pre-increment operator
-        template <typename T, typename = void>
-        struct has_pre_increment_operator : std::false_type {};
-
-        template <typename T>
-        struct has_pre_increment_operator<T, void_t<decltype(++(std::declval<T>()))>> : std::true_type {};
 
         // has pre-incrementable iterator
         template <typename T, typename = void>

@@ -29,7 +29,11 @@ TEST(isRangeBased, test1)
     class E : public D
     {
     public:
-        typedef std::vector<char>::iterator iterator;
+        typedef std::vector<E>::iterator iterator;
+    };
+
+    class F : public std::vector<F>
+    {
     };
 
     EXPECT_EQ (false, is_range_based<A>::value);
@@ -37,6 +41,7 @@ TEST(isRangeBased, test1)
     EXPECT_EQ (false, is_range_based<C>::value);
     EXPECT_EQ (false, is_range_based<D>::value);
     EXPECT_EQ (true, is_range_based<E>::value);
+    EXPECT_EQ (true, is_range_based<F>::value);
 }
 
 int main(int argc, char **argv) {
