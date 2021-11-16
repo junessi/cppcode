@@ -10,7 +10,7 @@ TEST(blaTest, DeSerialization0)
     std::string seStr = cppcode::common::string_serialize0(strings);
     EXPECT_EQ(std::string("0003foo0003bar"), seStr);
     std::vector<std::string> deStr = cppcode::common::string_deserialize0(seStr);
-    EXPECT_EQ(size_t(3), deStr.size());
+    EXPECT_EQ(size_t(2), deStr.size());
     EXPECT_EQ(std::string("foo"), deStr[0]);
     EXPECT_EQ(std::string("bar"), deStr[1]);
 }
