@@ -3,6 +3,9 @@ set(BINARY stringDeSerializationTest)
 file(GLOB SOURCES stringDeSerializationTest.hpp stringDeSerializationTest.cpp)
 add_executable(${BINARY} ${SOURCES})
 
-add_test(NAME ${BINARY} COMMAND ${BINARY})
+add_custom_command(TARGET ${BINARY}
+                   COMMENT "Run unittest ${BINARY}"
+                   POST_BUILD
+                   COMMAND ${BINARY})
 
 target_link_libraries(${BINARY} PUBLIC ${CMAKE_PROJECT_NAME}_lib gtest)
