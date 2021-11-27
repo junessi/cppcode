@@ -36,14 +36,12 @@ jobs:
           at: .
       - run:
           name: Run ctest
-          command: |
-            cd build
-            ctest
+          command: 'cd build && make test'
       - store_test_results:
           path: build
 
 workflows:
-  version: 2
+  version: 2.1
   build-and-test:
     jobs:
       - build
