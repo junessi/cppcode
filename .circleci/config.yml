@@ -32,7 +32,7 @@ jobs:
   test:
     executor: exectr
     steps:
-      - attach_work_space:
+      - attach_workspace:
           at: .
       - run:
           name: Run ctest
