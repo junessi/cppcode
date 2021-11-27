@@ -35,6 +35,9 @@ jobs:
       - attach_workspace:
           at: .
       - run:
+          name: Install cmake
+          command: 'apt-get update && sudo apt-get install -y cmake'
+      - run:
           name: Run ctest
           command: 'cd build && make test'
       - store_test_results:
