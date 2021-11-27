@@ -4,6 +4,8 @@ project(cppcode)
 set(GOOGLETEST_VERSION 1.10.0)
 
 set(CMAKE_CXX_STANDARD 14)
+enable_testing()
+include(CTest)
 
 include_directories(src)
 include_directories(test)
@@ -13,3 +15,6 @@ add_subdirectory(src)
 add_subdirectory(test)
 add_subdirectory(lib/googletest)
 # add_subdirectory(lib/googlemock)
+
+include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
+

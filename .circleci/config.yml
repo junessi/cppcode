@@ -1,19 +1,23 @@
 version: 2
 
+executors:
+  exectr:
+    docker:
+      - image: YourGitHubName/YourDockerRepoName:latest
+
 jobs:
   build:
-    docker:
-      - image: "debian:stretch"
+    executor: exectr
     steps:
       - checkout
       - run:
-          name: Installing SUDO
+          name: Installing sudo
           command: 'apt-get update && apt-get install -y sudo && rm -rf /var/lib/apt/lists/*'
       - run:
-          name: Installing GCC
+          name: Installing gcc
           command: 'apt-get update && apt-get install -y gcc g++'
       - run:
-          name: Install CMAKE
+          name: Install cmake
           command: 'apt-get update && sudo apt-get install -y cmake'
       - run:
           name: Creating Build Files
@@ -21,3 +25,28 @@ jobs:
       - run:
           name: Compile project
           command: 'cd build && make'
+      - persist_to_workspace:
+          root: .
+          paths: build
+
+  test:
+    executor: exectr
+    steps:
+      - attach_work_space:
+          at: .
+      - run:
+          name: Run ctest
+          command: |
+            cd build
+            ctest
+      - store_test_results:
+          path: build
+
+workflows:
+  version: 2
+  build-and-test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
