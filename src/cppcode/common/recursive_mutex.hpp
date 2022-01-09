@@ -12,43 +12,48 @@ namespace cppcode { namespace common {
 class rmutex : public std::mutex
 {
 public:
-    rmutex()
-        : m_count(0)
-    {}
-
     void lock()
     {
-        std::thread::id currentThreadId = std::this_thread::get_id();
+        std::thread::id defaultId;
+        const std::thread::id currentThreadId = std::this_thread::get_id();
         
-        if (m_ownerId == currentThreadId)
+        if (m_ownerThreadId.compare_exchange_strong(defaultId, currentThreadId))
         {
-            if (m_count == 0)
+            const uint32_t oldValue = m_count.fetch_add(1);
+            std::cout << "lock(): oldVaue: " << oldValue << &std::endl;
+
+            if (oldValue == 0)
             {
                 std::mutex::lock();
             }
-
-            m_count++;
+        }
+        else if (defaultId != currentThreadId)
+        {
+            std::mutex::lock(); // lock and wait for the other thread that owns the mutex
+            m_ownerThreadId = currentThreadId;
+            m_count = 1;
         }
         else
         {
-            std::mutex::lock();
-            m_ownerId = currentThreadId;
-            m_count = 1;
+            // defaultId == currentThreadId: reentry of mutex owner thread
+            m_count++;
         }
     }
 
     void unlock()
     {
-        m_count--;
-        if (m_count == 0)
+        const uint32_t oldValue = m_count.fetch_sub(1);
+        std::cout << "unlock(): oldVaue: " << oldValue << &std::endl;
+        if (oldValue == 1)
         {
+            m_ownerThreadId = std::thread::id{};
             std::mutex::unlock();
         }
     }
 
 private:
-    std::atomic<std::thread::id> m_ownerId;
-    uint32_t m_count;
+    std::atomic<std::thread::id> m_ownerThreadId{}; // a default-constructed thread id is treated as an invalid thread id
+    std::atomic<uint32_t> m_count{0};
 };
 
 }}
