@@ -20,7 +20,6 @@ public:
         if (m_ownerThreadId.compare_exchange_strong(defaultId, currentThreadId))
         {
             const uint32_t oldValue = m_count.fetch_add(1);
-            std::cout << "lock(): oldVaue: " << oldValue << &std::endl;
 
             if (oldValue == 0)
             {
@@ -43,7 +42,6 @@ public:
     void unlock()
     {
         const uint32_t oldValue = m_count.fetch_sub(1);
-        std::cout << "unlock(): oldVaue: " << oldValue << &std::endl;
         if (oldValue == 1)
         {
             m_ownerThreadId = std::thread::id{};
