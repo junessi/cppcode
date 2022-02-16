@@ -2,7 +2,7 @@
 #include <cppcode/common/binary_search.hpp>
 #include <vector>
 
-TEST(blaTest, test1)
+TEST(binarySearch, binary_search)
 {
     std::vector<uint32_t> v{1, 3, 5, 7};
     EXPECT_EQ (false, cppcode::common::binary_search(v, 2u));
