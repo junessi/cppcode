@@ -25,7 +25,7 @@ public:
             return m_values.back().second;
         }
         
-        return std::shared_ptr<Value>();
+        return std::shared_ptr<Value>{};
     }
     
     void put(const Key& key, std::shared_ptr<Value> value)
