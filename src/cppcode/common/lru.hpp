@@ -38,19 +38,17 @@ public:
         }
         else if (m_values.size() >= m_capacity)
         {
-            int keyToRemove = m_values.front().first;
-            m_keys.erase(keyToRemove);
-            auto it = m_values.begin();
-            it->first = key;
-            it->second = std::move(value);
-            visit(it);
-            m_keys[key] = it;
+            auto entryToReplaceIt = m_values.begin();
+            m_keys.erase(entryToReplaceIt->first);
+            entryToReplaceIt->first = key;
+            entryToReplaceIt->second = std::move(value);
+            visit(entryToReplaceIt);
+            m_keys[key] = entryToReplaceIt;
         }
         else
         {
-            m_values.emplace_back(key, std::move(value));
-            auto lastIt = m_values.end();
-            m_keys[key] = --lastIt;
+            auto newIt = m_values.emplace(m_values.end(), key, std::move(value));
+            m_keys[key] = newIt;
         }
     }
 private:
