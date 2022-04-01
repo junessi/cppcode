@@ -7,6 +7,8 @@ namespace cppcode { namespace common {
 template <class Key, class Value>
 class LRUCache {
 public:
+    FRIEND_TEST(LRUTest, test1);
+
     typedef typename std::pair<Key, std::shared_ptr<Value>> CacheEntry;
     typedef typename std::list<CacheEntry> Container;
     typedef typename std::list<CacheEntry>::iterator Iterator;
