@@ -5,7 +5,7 @@ set(CMAKE_CXX_COMPILER /usr/bin/x86_64-linux-gnu-g++)
 project(cppcode)
 set(GOOGLETEST_VERSION 1.10.0)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 enable_testing()
 include(CTest)
 
