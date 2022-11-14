@@ -3,7 +3,7 @@ version: 2.1
 executors:
   exectr:
     docker:
-      - image: 'debian:stretch'
+      - image: 'ubuntu:latest'
 
 jobs:
   build:
