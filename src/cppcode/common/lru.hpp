@@ -32,25 +32,28 @@ public:
     
     void put(const Key& key, std::shared_ptr<Value> value)
     {
-        auto it = m_keys.find(key);
-        if (it != m_keys.end())
+        auto keyIt = m_keys.find(key);
+        if (keyIt != m_keys.end())
         {
-            visit(it->second);
-            m_values.back().second = std::move(value);
-        }
-        else if (m_values.size() >= m_capacity)
-        {
-            auto entryToReplaceIt = m_values.begin();
-            m_keys.erase(entryToReplaceIt->first);
-            entryToReplaceIt->first = key;
-            entryToReplaceIt->second = std::move(value);
-            visit(entryToReplaceIt);
-            m_keys[key] = entryToReplaceIt;
+            visit(keyIt->second);
         }
         else
         {
-            auto newIt = m_values.emplace(m_values.end(), key, std::move(value));
-            m_keys[key] = newIt;
+            if (m_values.size() >= m_capacity)
+            {
+                auto it = m_values.begin();
+                m_keys.erase(it->first);
+                m_keys[key] = it;
+
+                visit(it);
+                it->first = key;
+                it->second = std::move(value);
+            }
+            else
+            {
+                auto newIt = m_values.emplace(m_values.end(), key, std::move(value));
+                m_keys[key] = newIt;
+            }
         }
     }
 private:
